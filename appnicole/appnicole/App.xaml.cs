@@ -10,7 +10,7 @@ namespace appnicole
 		{
 			InitializeComponent();
 
-			MainPage = new stackpage();
+			MainPage = new ValgusFoor2();
 		}
 
 		protected override void OnStart()
