@@ -18,54 +18,64 @@ namespace appnicole
 			Label Red = new Label()
 			{
                 Text ="red",
-				TextColor = Color.Red,
+				TextColor = Color.Black,
 				FontSize=30,
 				FontAttributes = FontAttributes.Bold
+			};
+			Frame pun = new Frame()
+			{
+				BackgroundColor = Color.Red,
+				Content = Red,
+				CornerRadius = 110,
+				Margin = new Thickness(130,0,130,0)
 			};
 			Label Yellow = new Label()
 			{
 				Text = "yellow",
-				TextColor = Color.Yellow,
+				TextColor = Color.Black,
 				FontSize = 30,
 				FontAttributes = FontAttributes.Bold
+			};
+			Frame kol = new Frame()
+			{
+				BackgroundColor = Color.Yellow,
+				Content = Yellow,
+				CornerRadius = 110,
+				Margin = new Thickness(130, 0, 130, 0)
 			};
 			Label Green = new Label()
 			{
 				Text = "green",
-				TextColor = Color.Green,
+				TextColor = Color.Black,
 				FontSize = 30,
 				FontAttributes = FontAttributes.Bold
 			};
+			Frame gre = new Frame()
+			{
+				BackgroundColor = Color.Green,
+				Content = Green,
+				CornerRadius = 110,
+				Margin = new Thickness(130, 0, 130, 0)
+			};
 			StackLayout stackLayout = new StackLayout()
 			{
-				Children = { Red, Yellow, Green }
+				Children = { pun, kol, gre }
 			};
-		
-			stackLayout.Orientation = StackOrientation.Horizontal;
+			Button off = new Button()
+			{
+				Text = "Sisse",
+				BackgroundColor = Color.Green,
+				BorderWidth = 2,
+				FontSize = 20,
+				FontAttributes = FontAttributes.Bold,
+			};
+
+			stackLayout.Orientation = StackOrientation.Vertical;
 			Content = stackLayout;
 
-			Random rnd = new Random();
-		
-			{
-				int c = rnd.Next(1, 4);
-				if (c == 1)
-				{
-					Red.BackgroundColor = Color.FromRgb(255, 0, 0);
-					Green.BackgroundColor = Color.FromRgb(100, 100, 100);
-					Yellow.BackgroundColor = Color.FromRgb(100, 100, 100);
-				}
-				else if (c == 2)
-				{
-					Red.BackgroundColor = Color.FromRgb(100, 100, 100);
-					Green.BackgroundColor = Color.FromRgb(255, 215, 0);
-					Yellow.BackgroundColor = Color.FromRgb(100, 100, 100);
-				}
-				else
-				{
-					Red.BackgroundColor = Color.FromRgb(100, 100, 100);
-					Green.BackgroundColor = Color.FromRgb(100, 100, 100);
-					Yellow.BackgroundColor = Color.FromRgb(0, 255, 0);
-				}
+			
+
+			}
+			
 			}
 	}
-}
