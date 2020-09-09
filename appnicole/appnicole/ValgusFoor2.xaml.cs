@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -12,70 +13,151 @@ namespace appnicole
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ValgusFoor2 : ContentPage
 	{
+		Label Red, Yellow, Green;
+		Frame pun, kol, gre;
+		Button sisse, off;
+		bool sisse_valja;
 		public ValgusFoor2()
 		{
 			//InitializeComponent();
-			Label Red = new Label()
+			sisse_valja = false;
+			Red = new Label()
 			{
-                Text ="red",
+				Text = "red",
 				TextColor = Color.Black,
-				FontSize=30,
+				FontSize = 30,
 				FontAttributes = FontAttributes.Bold
 			};
-			Frame pun = new Frame()
+			pun = new Frame()
 			{
 				BackgroundColor = Color.Red,
 				Content = Red,
 				CornerRadius = 110,
-				Margin = new Thickness(130,0,130,0)
+				Margin = new Thickness(80, 0, 80, 0)
 			};
-			Label Yellow = new Label()
+			Yellow = new Label()
 			{
 				Text = "yellow",
 				TextColor = Color.Black,
 				FontSize = 30,
 				FontAttributes = FontAttributes.Bold
 			};
-			Frame kol = new Frame()
+			kol = new Frame()
 			{
 				BackgroundColor = Color.Yellow,
 				Content = Yellow,
 				CornerRadius = 110,
-				Margin = new Thickness(130, 0, 130, 0)
+				Margin = new Thickness(80, 0, 80, 0)
 			};
-			Label Green = new Label()
+			Green = new Label()
 			{
 				Text = "green",
 				TextColor = Color.Black,
 				FontSize = 30,
 				FontAttributes = FontAttributes.Bold
 			};
-			Frame gre = new Frame()
+			gre = new Frame()
 			{
 				BackgroundColor = Color.Green,
 				Content = Green,
 				CornerRadius = 110,
-				Margin = new Thickness(130, 0, 130, 0)
+				Margin = new Thickness(80, 0, 80, 0)
 			};
+			
+			sisse = new Button()
+			{
+				Text = "Sisse",
+				BackgroundColor = Color.FromRgb(200, 100, 45),
+				BorderColor = Color.FromRgb(50, 150, 200)
+				
+			};
+
+			off = new Button()
+			{
+				Text = "Off",
+				BackgroundColor = Color.FromRgb(200, 100, 45),
+				BorderColor = Color.FromRgb(50, 150, 200)
+			};
+			
+
+
+			StackLayout stackLayout1 = new StackLayout()
+			{
+				Children = { sisse, off}
+			};
+			stackLayout1.Orientation = StackOrientation.Horizontal;
 			StackLayout stackLayout = new StackLayout()
 			{
 				Children = { pun, kol, gre }
 			};
-			Button off = new Button()
-			{
-				Text = "Sisse",
-				BackgroundColor = Color.Green,
-				BorderWidth = 2,
-				FontSize = 20,
-				FontAttributes = FontAttributes.Bold,
-			};
-
 			stackLayout.Orientation = StackOrientation.Vertical;
-			Content = stackLayout;
+			StackLayout stack = new StackLayout()
+			{
+				Children = {stackLayout1, stackLayout}
+			};
+			Content = stack;
+				
+			
+			
+
+			sisse.Clicked += Sisse_Clicked;
+			off.Clicked += Off_Clicked;
+			
+			
+
+			var tap = new TapGestureRecognizer();
+			tap.Tapped += Tap_Tapped; ;
+			pun.GestureRecognizers.Add(tap);
+			kol.GestureRecognizers.Add(tap);
+			gre.GestureRecognizers.Add(tap);
+
+
+			//stackLayout.Orientation = StackOrientation.Vertical;
+			//sisse.Clicked += Sisse_Clicked;
+			
 
 			
 
+		}
+		private async void Sisse_Clicked(object sender, EventArgs e)
+		{
+			pun.BackgroundColor = Color.Red;
+			pun.BorderColor = Color.WhiteSmoke;
+
+			sisse_valja = false;
+			for (int i = 0; i <100; i++)
+			{
+				Red.FontSize++;
+				await Task.Run(() => Thread.Sleep(1000));
 			}
 			
+		}
+
+		private void Off_Clicked(object sender, EventArgs e)
+		{
+			pun.BackgroundColor = Color.Gray;
+			pun.BorderColor = Color.WhiteSmoke;
+
+			sisse_valja = true;
+		
+		}
+
+		private void Tap_Tapped(object sender, EventArgs e)
+		{
+			Frame fr = sender as Frame;
+			if (fr == pun)
+			{
+				Red.Text = "Стой";
 			}
+			else if (fr == kol)
+			{
+				Yellow.Text = "включи светофор";
+	
+			}
+			else if (fr == gre)
+			{
+				Green.Text = "Вперед";
+			}
+		}
+	}
 	}
